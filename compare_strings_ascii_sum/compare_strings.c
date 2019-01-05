@@ -17,7 +17,7 @@ char asciiDiff(char *first, char *second)
 {
     int sum = 0;
 
-    for(int i = 0; i < strlen(first); i++)
+    for (int i = 0; i < strlen(first); i++)
     {
         //printf("first: %c second: %c\n", first[i], second[j]);
         //printf("first - second = %i\n", first[i] - second[j]);
