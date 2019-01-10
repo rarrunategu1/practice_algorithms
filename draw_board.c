@@ -11,14 +11,34 @@ int main(void)
 
 char drawBoard()
 {
-    char boardBuild[3] = {'+', '-', '|'};
     int i;
+    int j;
 
-    for (i = 0; i < 3; i++)
-
+    for (i = 0; i < 5; i++)
     {
-        printf("%c", boardBuild[i]);
+        for(j=0; j<3; j++)
+        {
+            if(i==0 && j < 3)
+            {
+                putchar(' ');
+                putchar('|' + (j/2));
+                putchar(' ');
+            }
+            if(i == 1)
+            {
+                printf("\n");
+                putchar(' ');
+                putchar('-');
+                putchar('+');
+                putchar('-');
+                putchar('+');
+                putchar('-');
+            }
+        }
     }
+
+
+
     printf("\n");
     return '_';
 }
