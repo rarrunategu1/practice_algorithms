@@ -7,6 +7,8 @@ int main(void)
 {
     char letsPlay = drawBoard();
 
+
+
 }
 
 char drawBoard()
@@ -16,25 +18,34 @@ char drawBoard()
 
     for (i = 0; i < 5; i++)
     {
-        for(j=0; j<3; j++)
+        for(j = 0; j < 2; j++)
         {
-            if(i==0 && j < 3)
+            if(i % 2 == 0)
             {
-                putchar(' ');
+                putchar('X');
                 putchar('|' + (j/2));
-                putchar(' ');
+
+                if (j == 1)
+                {
+                    putchar('O');
+                    printf("\n");
+                }
             }
-            if(i == 1)
+            if(i % 2 == 1)
             {
-                printf("\n");
-                putchar(' ');
-                putchar('-');
-                putchar('+');
-                putchar('-');
-                putchar('+');
-                putchar('-');
+                putchar('-' + (j/2));
+                putchar('+' + (j/2));
+
+                if(j == 1)
+                {
+                    putchar('-');
+                    printf("\n");
+                }
+
             }
+
         }
+
     }
 
 
