@@ -1,72 +1,77 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
 
-#define ROW 5
-#define COLUMN 2
-#define FIRSTPLAYER 1
-#define SECONDPLAYER 2
-
-
-char drawBoard();
-void importBoard (string[]);
+void drawBoard();
+char importBoard(char []);
+bool isValid(char);
 
 
 char boardPlace[9] = {'0','1','2','3','4','5','6','7','8'};
 
 
+int exitGame = 0;
+
 int main(void)
 {
-    char firstPlayerMove;
-    char secondPlayerMove;
-    int i = 0;
-
-    //do until board is filled with X's and O's or game is won
-    do
-    {
-        firstPlayerMove = get_char("Player 1 enter an unused number position from 0-8 to place your move: ");
-
-    }
-    while ((firstPlayerMove < 48 || firstPlayerMove > 56 )&& (boardPlace[i] == 'X' || boardPlace[i] == 'O'));
-
-    for(i = 0; i < 9; i++)
-    {
-        if(boardPlace[i] == firstPlayerMove)
-        {
-            boardPlace[i] = 'X';
-        }
-
-    }
-
-       char letsPlay = drawBoard();
-
-        do
-    {
-        secondPlayerMove = get_char("Player 2 enter a number position from 0-8 to place your move: ");
-
-    }
-    while ((secondPlayerMove < 48 || secondPlayerMove > 56) && (boardPlace[i] == 'X' || boardPlace[i] == 'O'));
-
-    for(i = 0; i < 9; i++)
-    {
-        if(boardPlace[i] == secondPlayerMove )
-        {
-            boardPlace[i] = 'O';
-        }
-    }
-
-    letsPlay = drawBoard();
-
-
-
-
-
-
+    drawBoard();
+    char load[9] = {' ', 'X', 'O', ' ', ' ', 'X', ' ', 'O', ' '};
+    importBoard(load);
+    drawBoard();
+    isValid('0');
 }
 
-char drawBoard()
-{
 
+
+// board accepts an array of 9 characters that will be either be "" no token, "X" X token, or "O" O token
+// the import board function should take this data and enter it into the 2 data structures
+char importBoard(char boardstate[9])
+{
+    int i;
+    char xToken = 'X';
+    char oToken = 'O';
+
+
+    //Go through import board array
+    for(i = 0; i < 10; i++)
+    {
+        // //if it's an X or an O then assign the index of that character to the index of the boardPlace
+        if(boardstate[i] == xToken || boardstate[i] == oToken)
+        {
+            boardPlace[i] = boardstate[i];
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+
+
+// this function should accept one parameter a TicTacToe cell to move. This may come in whatever way fits the data structures you created. String/int/char/int int/etc
+// Your function should accept the move and determine if the move is valid. Be careful not to overthink this.
+// This function should return True or False on if the move is a valid move or not.
+bool isValid(char move)
+{
+    bool makeMove = true;
+    int i = 0;
+
+    for(i = 0; i <= 9; i++)
+    {
+        if(isalpha(boardPlace[i]))
+        {
+           makeMove = false;
+        }
+    }
+
+    return makeMove;
+}
+
+
+
+void drawBoard()
+{
     int i;
     int j;
 
@@ -94,11 +99,11 @@ char drawBoard()
                 printf("     %c|%c|%c \n\n", boardPlace[6], boardPlace[7], boardPlace[8]);
             }
 
-
-
         }
 
     }
 
-    return '_';
+    //return 0;
 }
+
+
