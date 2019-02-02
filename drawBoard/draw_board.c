@@ -20,7 +20,8 @@ int main(void)
     char load[9] = {' ', 'X', 'O', ' ', ' ', 'X', ' ', 'O', ' '};
     importBoard(load);
     drawBoard();
-    isValid('0');
+    char playerMove = boardPlace[0];
+    isValid(playerMove);
 }
 
 
@@ -48,28 +49,30 @@ char importBoard(char boardstate[9])
     return 0;
 }
 
-
 // this function should accept one parameter a TicTacToe cell to move. This may come in whatever way fits the data structures you created. String/int/char/int int/etc
 // Your function should accept the move and determine if the move is valid. Be careful not to overthink this.
 // This function should return True or False on if the move is a valid move or not.
 bool isValid(char move)
 {
-    bool makeMove = true;
+    bool makeMove = false;
     int i = 0;
 
-    for(i = 0; i <= 9; i++)
+    for(i = 0; i < 9; i++)
     {
-        if(isalpha(boardPlace[i]))
+
+        if(!isalpha(boardPlace[i]))
         {
-           makeMove = false;
+            makeMove = true;
+            //printf("good move\n");
         }
     }
 
     return makeMove;
+
 }
 
 
-
+//Draws tic tac toe board
 void drawBoard()
 {
     int i;
@@ -103,7 +106,6 @@ void drawBoard()
 
     }
 
-    //return 0;
 }
 
 
