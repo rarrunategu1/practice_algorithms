@@ -7,24 +7,25 @@
 void drawBoard();
 char importBoard(char []);
 bool isValidMove(char);
+bool isGameover();
+bool didWin();
 
 
 char boardPlace[9] = {'0','1','2','3','4','5','6','7','8'};
-
 
 int exitGame = 0;
 
 int main(void)
 {
     drawBoard();
-    char load[9] = {' ', 'X', 'O', ' ', ' ', 'X', ' ', 'O', ' '};
+    char load[9] = {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'};
     importBoard(load);
     drawBoard();
     char playerMove = boardPlace[4];
     isValidMove(playerMove);
+    isGameover();
+    didWin();
 }
-
-
 
 // board accepts an array of 9 characters that will be either be "" no token, "X" X token, or "O" O token
 // the import board function should take this data and enter it into the 2 data structures
@@ -54,7 +55,7 @@ bool isValidMove(char move)
 {
     bool makeMove = false;
 
-    if(!isalpha(move) && (move <= boardPlace[8] && move >= boardPlace[0]))
+    if(!isalpha(move))
     {
         makeMove = true;
         printf("Nice Move!\n");
@@ -64,6 +65,57 @@ bool isValidMove(char move)
         printf("Sorry, that spot is taken. Please try again.\n");
     }
     return makeMove;
+}
+
+// isGameover()
+// the function should check the state of the board and determine if the game is over (not by winning for the moment).
+// function should return boolean
+bool isGameover()
+{
+    int i = 0;
+
+    bool endGame = false;
+
+    for(i = 0; i < 9; i++)
+    {
+        //if boardPlace is equal to only alpha
+        if(isalpha(boardPlace[i]) && (!isalpha(boardPlace[i])))
+        {
+            printf("%i %c\n",i, boardPlace[i]);
+            endGame = true;
+        }
+    }
+
+    fputs(endGame ? "Game Over: true\n" : "Game Over: false\n", stdout);
+    return endGame;
+}
+// this function should check the state of the board and for today MVP it should at least check 3 out of the 8 win conditions.
+// Consider what you should return here for this function. There is a very obvious item you would return. However, could you return something else that would give the same result along with additional information?
+
+//checks if the board is in a win state or not
+bool didWin()
+{
+    // char xToken = 'X';
+    // char oToken = 'O';
+
+    bool win = false;
+
+    // int i = 0;
+    // int j = 0;
+
+    // for (i = 0; i < 8; i++)
+    // {
+    //     for(j = 0; j < 1; j++)
+    //     {
+    //         printf("I: %c, J: %c\n", boardPlace[i], boardPlace[j]);
+
+    //     }
+    // }
+
+
+
+    // //}
+    return win;
 }
 
 //Draws tic tac toe board
