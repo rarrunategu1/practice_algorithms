@@ -11,7 +11,7 @@ bool isGameover();
 bool didWin();
 
 
-char boardPlace[9] = {'0','1','2','3','4','5','6','7','8'};
+char boardPlace[9] = {' ',' ',' ',' ',' ',' ',' ',' ',' '};
 
 int exitGame = 0;
 
@@ -73,15 +73,19 @@ bool isValidMove(char move)
 bool isGameover()
 {
     int i = 0;
-
     bool endGame = false;
 
     for(i = 0; i < 9; i++)
     {
         //if boardPlace is equal to only alpha
-        if(isalpha(boardPlace[i]) && (!isalpha(boardPlace[i])))
+        if(boardPlace[i] == ' ')
         {
             printf("%i %c\n",i, boardPlace[i]);
+            endGame = false;
+            break;
+        }
+        else
+        {
             endGame = true;
         }
     }
