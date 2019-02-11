@@ -55,16 +55,31 @@ bool isValidMove(char move)
 {
     bool makeMove = false;
 
-    if(!isalpha(move))
+    int i = 0;
+
+    for (i = 0; i < 9; i++)
     {
-        makeMove = true;
-        printf("Nice Move!\n");
+
+    if(move != ' ')
+    {
+        printf("Please pick an unused position on the board\n");
+        break;
     }
+
+
+    if(move == 'X' || move == 'O')
+        {
+            makeMove = true;
+            printf("Nice Move!\n");
+        }
     else
     {
-        printf("Sorry, that spot is taken. Please try again.\n");
+        //printf("Please pick an X or an O.\n");
     }
+    }
+
     return makeMove;
+
 }
 
 // isGameover()
@@ -80,7 +95,7 @@ bool isGameover()
         //if boardPlace is equal to only alpha
         if(boardPlace[i] == ' ')
         {
-            printf("%i %c\n",i, boardPlace[i]);
+            //printf("%i %c\n", i, boardPlace[i]);
             endGame = false;
             break;
         }
@@ -104,21 +119,21 @@ bool didWin()
 
     bool win = false;
 
-    // int i = 0;
-    // int j = 0;
+    int i = 0;
+    int j = 0;
 
-    // for (i = 0; i < 8; i++)
-    // {
-    //     for(j = 0; j < 1; j++)
-    //     {
-    //         printf("I: %c, J: %c\n", boardPlace[i], boardPlace[j]);
+    for (i = 0; i < 8; i++)
+    {
+        for(j = 0; j < 1; j++)
+        {
+            //printf("I: %c, J: %c\n", boardPlace[i], boardPlace[j]);
 
-    //     }
-    // }
+        }
+    }
 
 
 
-    // //}
+
     return win;
 }
 
