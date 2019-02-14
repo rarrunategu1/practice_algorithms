@@ -144,7 +144,7 @@ bool didWin()
         if(boardPlace[0][0] == boardPlace[1][1] && boardPlace[0][0] == boardPlace[2][2])
             {
                 win = true;
-                printf("win\n");
+                //printf("win\n");
             // printf("%c\n", boardPlace[1][position]);
             // printf("%c\n", boardPlace[0][position]);
             }
@@ -152,8 +152,12 @@ bool didWin()
             {
                  win = true;
             }
+            if(win == true)
+            {
+                printf("You win!\n");
+            }
 
-    printf("%d\n", win);
+    //printf("%d\n", win);
 
     return win;
 }
