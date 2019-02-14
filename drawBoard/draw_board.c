@@ -5,23 +5,23 @@
 #include <stdbool.h>
 
 void drawBoard();
-char importBoard(char []);
+char importBoard(char [3][3]);
 bool isValidMove(char);
 bool isGameover();
 bool didWin();
 
 
-char boardPlace[9] = {' ',' ',' ',' ',' ',' ',' ',' ',' '};
+char boardPlace[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 
 int exitGame = 0;
 
 int main(void)
 {
     drawBoard();
-    char load[9] = {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'};
+    char load[3][3] = {{'X', 'O', 'X'}, {'X', 'X', 'O'}, {'O', 'X', 'X'}};
     importBoard(load);
     drawBoard();
-    char playerMove = boardPlace[4];
+    char playerMove = boardPlace[0][1];
     isValidMove(playerMove);
     isGameover();
     didWin();
@@ -29,20 +29,24 @@ int main(void)
 
 // board accepts an array of 9 characters that will be either be "" no token, "X" X token, or "O" O token
 // the import board function should take this data and enter it into the 2 data structures
-char importBoard(char boardstate[9])
+char importBoard(char boardstate[3][3])
 {
-    int i;
+    int i = 0;
+    int j = 0;
     char xToken = 'X';
     char oToken = 'O';
 
 
     //Go through import board array
-    for(i = 0; i < 10; i++)
+    for(i = 0; i < 3; i++)
     {
-        // //if it's an X or an O then assign the index of that character to the index of the boardPlace
-        if(boardstate[i] == xToken || boardstate[i] == oToken)
+        for(j = 0; j < 3; j++)
         {
-            boardPlace[i] = boardstate[i];
+        // //if it's an X or an O then assign the index of that character to the index of the boardPlace
+        if(boardstate[i][j] == xToken || boardstate[i][j] == oToken)
+        {
+            boardPlace[i][j] = boardstate[i][j];
+        }
         }
     }
 
@@ -88,12 +92,15 @@ bool isValidMove(char move)
 bool isGameover()
 {
     int i = 0;
+    int j = 0;
     bool endGame = false;
 
-    for(i = 0; i < 9; i++)
+    for(i = 0; i < 3; i++)
     {
+        for(j = 0; j < 3; j++)
+        {
         //if boardPlace is equal to only alpha
-        if(boardPlace[i] == ' ')
+        if(boardPlace[i][j] == ' ')
         {
             //printf("%i %c\n", i, boardPlace[i]);
             endGame = false;
@@ -103,6 +110,7 @@ bool isGameover()
         {
             endGame = true;
         }
+    }
     }
 
     fputs(endGame ? "Game Over: true\n" : "Game Over: false\n", stdout);
@@ -114,25 +122,38 @@ bool isGameover()
 //checks if the board is in a win state or not
 bool didWin()
 {
-    // char xToken = 'X';
-    // char oToken = 'O';
-
     bool win = false;
 
-    int i = 0;
-    int j = 0;
+    int position = 0;
 
-    for (i = 0; i < 8; i++)
-    {
-        for(j = 0; j < 1; j++)
+        for(position = 0; position < 3; position++)
         {
-            //printf("I: %c, J: %c\n", boardPlace[i], boardPlace[j]);
-
+            //checking rows for win
+            if((boardPlace[position][0] == boardPlace[position][1]) && (boardPlace[position][0] == boardPlace[position][2]))
+            {
+                win = true;
+                //printf("Win\n");
+            }
+            //checking columns for win
+            if((boardPlace[0][position] == boardPlace[1][position]) && (boardPlace[0][position] == boardPlace[2][position]))
+            {
+                win = true;
+                //printf("Win\n");
+            }
         }
-    }
+        if(boardPlace[0][0] == boardPlace[1][1] && boardPlace[0][0] == boardPlace[2][2])
+            {
+                win = true;
+                printf("win\n");
+            // printf("%c\n", boardPlace[1][position]);
+            // printf("%c\n", boardPlace[0][position]);
+            }
+            if(boardPlace[0][2] == boardPlace[1][1] && boardPlace[0][2] == boardPlace[2][0])
+            {
+                 win = true;
+            }
 
-
-
+    printf("%d\n", win);
 
     return win;
 }
@@ -152,7 +173,7 @@ void drawBoard()
 
             if (i == 0)
             {
-                printf("     %c|%c|%c \n", boardPlace[0], boardPlace[1], boardPlace[2]);
+                printf("     %c|%c|%c \n", boardPlace[0][0], boardPlace[0][1], boardPlace[0][2]);
             }
             else if (i % 2 == 1)
             {
@@ -160,11 +181,11 @@ void drawBoard()
             }
             else if (i == 2)
             {
-                printf("     %c|%c|%c \n", boardPlace[3], boardPlace[4], boardPlace[5]);
+                printf("     %c|%c|%c \n", boardPlace[1][0], boardPlace[1][1], boardPlace[1][2]);
             }
             else if (i == 4)
             {
-                printf("     %c|%c|%c \n\n", boardPlace[6], boardPlace[7], boardPlace[8]);
+                printf("     %c|%c|%c \n\n", boardPlace[2][0], boardPlace[2][1], boardPlace[2][2]);
             }
 
         }
